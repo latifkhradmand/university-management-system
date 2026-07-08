@@ -5,15 +5,18 @@ import MobileNav from "../MobileNav/MobileNav";
 
 const Header = () => {
   const isDark = document.documentElement.classList.contains("dark");
+  const logoSrc = isDark
+    ? `${import.meta.env.BASE_URL}light-logo.png`
+    : `${import.meta.env.BASE_URL}light-logo.png`;
 
   return (
     <header className="fixed left-0 top-0 z-50 h-16 w-full border-b border-slate-200/70 bg-white/80 backdrop-blur-2xl dark:border-slate-700/70 dark:bg-slate-950/80">
       <div className="flex h-16 w-full items-center justify-between px-4 sm:px-6">
-        <div className="flex h-full items-center space-x-2">
+        <div className="flex h-full min-w-0 items-center gap-2">
           <img
-            src={isDark ? "public/light-logo.png" : "public/dark-logo.png"}
+            src={logoSrc}
             alt="University logo"
-            className="h-full w-auto object-contain"
+            className="h-9 w-auto flex-shrink-0 object-contain sm:h-12"
           />
           <span className="text-lg font-semibold text-slate-800 dark:text-slate-100 sm:text-xl">
             University Management System
