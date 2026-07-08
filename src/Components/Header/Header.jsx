@@ -1,45 +1,42 @@
-import { LuLanguages,  } from "react-icons/lu";
-import { MdModeNight, MdLightMode } from "react-icons/md";
-import { FaSignInAlt } from "react-icons/fa";
-
+import { LuLanguages } from "react-icons/lu";
+import ThemeToggle from "../ThemeToggle/ThemeToggle";
+import LoginButton from "../LoginButton/LoginButton";
+import MobileNav from "../MobileNav/MobileNav";
 
 const Header = () => {
-  let isDark = true;
+  const isDark = document.documentElement.classList.contains("dark");
 
   return (
-    <header className="w-screen h-16 bg-white/80 backdrop-blur-md fixed top-0 left-0 z-50">
-      <div className="w-screen h-16 flex items-center justify-between p-4 ">
-        <div className="w-auto h-full flex items-center space-x-2">
+    <header className="fixed left-0 top-0 z-50 h-16 w-full border-b border-slate-200/70 bg-white/80 backdrop-blur-2xl dark:border-slate-700/70 dark:bg-slate-950/80">
+      <div className="flex h-16 w-full items-center justify-between px-4 sm:px-6">
+        <div className="flex h-full items-center space-x-2">
           <img
-            src={isDark ? "/public/light-logo.png" : "/public/dark-logo.png"}
-            alt=""
-            className="w-auto h-full"
+            src={isDark ? "public/light-logo.png" : "public/dark-logo.png"}
+            alt="University logo"
+            className="h-full w-auto object-contain"
           />
-          <span className="text-xl font-bold">University Management System</span>
+          <span className="text-lg font-semibold text-slate-800 dark:text-slate-100 sm:text-xl">
+            University Management System
+          </span>
         </div>
 
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 sm:space-x-4">
           <button
             type="button"
-            className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 cursor-pointer"
+            className="hidden h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-100 text-slate-600 transition hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700 sm:flex"
           >
             <LuLanguages />
           </button>
 
-          <button
-            type="button"
-            className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 cursor-pointer"
-          >
-            {isDark ? <MdModeNight /> : <MdLightMode />}
-          </button>
+          <div className="hidden sm:flex sm:items-center sm:space-x-4">
+            <ThemeToggle />
+            <LoginButton />
+          </div>
 
-          <button
-            type="button"
-            className="w-20 h-10 rounded-full bg-primary flex items-center justify-center text-gray-600 cursor-pointer"
-          >
-            <FaSignInAlt className="text-white" />
-            <span className="sr-only">Login</span>
-          </button>
+          <div className="flex items-center gap-2 sm:hidden">
+            <ThemeToggle />
+            <MobileNav />
+          </div>
         </div>
       </div>
     </header>

@@ -7,8 +7,18 @@ import {
   FaUniversity,
   FaGraduationCap,
 } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const ServiceButton = () => {
+  const navigate = useNavigate();
+  const handleAction = (action) => {
+    if (action === "login") {
+      navigate("/login");
+      return;
+    }
+
+    console.log(action);
+  };
 
   const menuItems = [
     {
@@ -75,40 +85,44 @@ const ServiceButton = () => {
       iconColor: "text-cyan-600",
     },
   ];
+
   return (
-    <section className="w-full px-4 md:px-8 py-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <section className="w-full rounded-4xl border border-slate-200/70 bg-white/80 p-4 shadow-sm backdrop-blur sm:p-6 lg:p-8 dark:border-slate-800 dark:bg-slate-900/80">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {menuItems.map((item) => {
           const Icon = item.icon;
 
           return (
             <button
               key={item.id}
-              onClick={() => console.log(item.action)}
-              className="group bg-white rounded-3xl p-6 text-left border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer"
+              onClick={() => handleAction(item.action)}
+              className="group cursor-pointer rounded-3xl border border-slate-200 bg-linear-to-br from-white to-slate-50 p-5 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-400 hover:shadow-xl dark:border-slate-700 dark:from-slate-800 dark:to-slate-900"
             >
               {/* Icon */}
               <div
-                className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-5 ${item.bgColor}`}
+                className={`mb-4 flex h-12 w-12 items-center justify-center rounded-2xl ${item.bgColor} shadow-inner`}
               >
                 <Icon
-                  className={`text-2xl ${item.iconColor} transition-transform duration-300 group-hover:scale-110`}
+                  className={`text-xl ${item.iconColor} transition-transform duration-300 group-hover:scale-110`}
                 />
               </div>
 
               {/* Title */}
-              <h3 className="text-lg font-bold text-slate-800 mb-2">
+              <h3 className="mb-2 text-lg font-semibold text-slate-800 dark:text-white">
                 {item.name}
               </h3>
 
               {/* Description */}
-              <p className="text-sm text-slate-500 leading-relaxed">
+              <p className="text-sm leading-6 text-slate-500 dark:text-slate-300">
                 {item.details}
               </p>
 
               {/* Arrow */}
-              <div className="mt-5 flex justify-end">
-                <span className="text-slate-400 group-hover:text-slate-800 transition-colors">
+              <div className="mt-5 flex items-center justify-between">
+                <span className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-400 dark:text-slate-500">
+                  Explore
+                </span>
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-900 text-sm text-white transition-all duration-300 group-hover:translate-x-1 group-hover:bg-blue-600 dark:bg-slate-100 dark:text-slate-900">
                   →
                 </span>
               </div>

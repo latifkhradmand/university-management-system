@@ -4,42 +4,42 @@ export default function Slider() {
   const slides = [
     {
       image:
-        "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=60",
+        "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&q=80",
       title: "History of the University",
       description:
-        "Established to empower future leaders, our university has grown from a small institution into a modern center of excellence.",
+        "Discover how our institution grew into a leading center of innovation, teaching, and student success.",
       buttonText: "Explore History",
     },
     {
       image:
-        "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&q=60",
+        "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200&q=80",
       title: "Register Now",
       description:
-        "Complete your online application, upload documents, and begin your academic journey today.",
+        "Begin your academic journey with a simple online admission process and guided support.",
       buttonText: "Apply Now",
     },
     {
       image:
-        "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=60",
+        "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&q=80",
       title: "Awards & Achievements",
       description:
-        "Recognized for academic excellence, innovation, and outstanding student success.",
+        "See the milestones, honors, and accomplishments that define our campus community.",
       buttonText: "View Awards",
     },
     {
       image:
-        "https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=60",
+        "https://images.unsplash.com/photo-1562774053-701939374585?w=1200&q=80",
       title: "Student & Staff Login",
       description:
-        "Access courses, schedules, attendance, grades, and university services.",
+        "Access your dashboard for schedules, grades, attendance, and essential university services.",
       buttonText: "Login",
     },
     {
       image:
-        "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=800&q=60",
+        "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=1200&q=80",
       title: "University Management System",
       description:
-        "Manage admissions, academics, examinations, finance, and analytics from one platform.",
+        "Manage admissions, academics, examinations, finance, and analytics from one connected platform.",
       buttonText: "Learn More",
     },
   ];
@@ -55,76 +55,79 @@ export default function Slider() {
   };
 
   useEffect(() => {
-    const interval = setInterval(nextSlide, 5000);
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 6000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [slides.length]);
 
   return (
-    <section className="relative w-full h-screen overflow-hidden">
-      {/* Slides Track */}
+    <section className="relative w-full overflow-hidden bg-slate-950">
       <div
-        className="flex h-full transition-transform duration-[1400ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
-        style={{
-          transform: `translate3d(-${current * 100}%,0,0)`,
-        }}
+        className="flex min-h-[70vh] transition-transform duration-1200 ease-[cubic-bezier(0.22,1,0.36,1)] sm:min-h-[80vh] lg:min-h-[90vh]"
+        style={{ transform: `translate3d(-${current * 100}%,0,0)` }}
       >
         {slides.map((slide, index) => (
-          <div key={index} className="relative w-full h-full flex-shrink-0">
+          <div key={index} className="relative min-w-full shrink-0">
             <img
               src={slide.image}
               alt={slide.title}
-              className="w-full h-full object-cover"
+              className="h-full min-h-[70vh] w-full object-cover sm:min-h-[80vh] lg:min-h-[90vh]"
             />
+            <div className="absolute inset-0 bg-linear-to-r from-slate-950/80 via-slate-900/50 to-slate-900/20" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.16),transparent_35%)]" />
 
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/50" />
-
-            {/* Content */}
             <div className="absolute inset-0 flex items-center">
-              <div className="max-w-3xl px-6 md:px-16 text-white">
-                <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              <div className="mx-auto flex w-full max-w-7xl flex-col items-start justify-center px-4 py-16 sm:px-10 sm:py-20 lg:px-16">
+                <div className="mb-3 inline-flex rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium text-white/90 backdrop-blur sm:text-sm">
+                  University Highlights
+                </div>
+                <h1 className="max-w-2xl text-2xl font-semibold leading-tight text-white sm:text-3xl md:text-5xl lg:text-6xl">
                   {slide.title}
                 </h1>
-
-                <p className="text-lg md:text-xl mb-8 leading-relaxed">
+                <p className="mt-3 max-w-xl text-sm leading-7 text-slate-200 sm:mt-4 sm:text-base md:text-lg lg:text-xl">
                   {slide.description}
                 </p>
-
-                <button className="px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 transition-all duration-300">
-                  {slide.buttonText}
-                </button>
+                <div className="mt-6 flex flex-wrap gap-3 sm:mt-8">
+                  <button className="rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/30 transition hover:bg-blue-700 sm:px-8 sm:py-3 sm:text-base">
+                    {slide.buttonText}
+                  </button>
+                  <button className="rounded-full border border-white/30 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20 sm:px-8 sm:py-3 sm:text-base">
+                    View More
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Previous */}
       <button
         onClick={prevSlide}
-        className="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-black/20 backdrop-blur-md text-white hover:bg-black/40 transition"
+        className="absolute left-3 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-2xl text-white backdrop-blur transition hover:bg-white/20 sm:flex"
+        aria-label="Previous slide"
       >
         ❮
       </button>
 
-      {/* Next */}
       <button
         onClick={nextSlide}
-        className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-black/20 backdrop-blur-md text-white hover:bg-black/40 transition"
+        className="absolute right-3 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-2xl text-white backdrop-blur transition hover:bg-white/20 sm:flex"
+        aria-label="Next slide"
       >
         ❯
       </button>
 
-      {/* Dots */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3">
+      <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/15 bg-black/25 px-3 py-2 backdrop-blur sm:bottom-6">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrent(index)}
-            className={`h-3 rounded-full transition-all duration-500 ${
-              current === index ? "w-10 bg-white" : "w-3 bg-white/50"
+            className={`h-2.5 rounded-full transition-all duration-500 ${
+              current === index ? "w-8 bg-white" : "w-2.5 bg-white/50"
             }`}
+            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>

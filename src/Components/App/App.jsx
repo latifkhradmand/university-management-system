@@ -1,17 +1,20 @@
-import Header from "../Header/Header";
-import Services from "../Services/Services";
-import Slider from "../Slider/Slider";
-
+import React from "react";
+import Home from "../../Pages/Home";
+import StudentPanel from "../../Pages/StudentPanel";
+import "../../index.css";
+import Login from "../Login/Login";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
-  return ( 
+  return (
     <>
-    <Header />
-    <Slider />
-    <Services />
-    
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/student-panel" element={<StudentPanel />} />
+      </Routes>
     </>
-   );
+  );
 }
 
 export default App;
